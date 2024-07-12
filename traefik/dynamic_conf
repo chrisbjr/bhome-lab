@@ -1,4 +1,6 @@
 tls:
-  certificates:
-    - certFile: /certs/bhome.network.pem
-      keyFile: /certs/bhome.network.key
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/bhome.network.pem
+        keyFile: /certs/bhome.network.key
