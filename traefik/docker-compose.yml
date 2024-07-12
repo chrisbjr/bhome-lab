@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    restart: always
+    command:
+      - "--api.insecure=true"  # Remove or secure this in production
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.http.tls=true"
+      - "--entrypoints.websecure.http.tls.certificates.certFile=/certs/bhome.network.pem"
+      - "--entrypoints.websecure.http.tls.certificates.keyFile=/certs/bhome.network.key"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/root/traefik/certs:/certs"
+    networks:
+      - traefik-network
+
+  whoami:
+    image: containous/whoami
+    container_name: whoami
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.yourdomain.com`)"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.tls=true"
+    networks:
+      - traefik-network
+
+networks:
+  traefik-network:
+    external: true
