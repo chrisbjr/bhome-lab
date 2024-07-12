@@ -17,8 +17,8 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "/root/traefik/certs:/certs:ro"
-      - "./dynamic_conf:/etc/traefik/dynamic_conf:ro"
+      - "/root/traefik/certs:/certs"
+      - "./dynamic_conf:/etc/traefik/dynamic_conf"
     networks:
       - traefik-network
 
