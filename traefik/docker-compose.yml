@@ -9,8 +9,13 @@ services:
       - "--providers.docker=true"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-      - "--providers.file.directory=/etc/traefik/dynamic_conf"
+      - "--providers.file.directory=/etc/traefik/dynamic_conf/certificates.yml"
       - "--providers.file.watch=true"
+      - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false" # Disable exposing all containers by default
+      - "--providers.docker.network=traefik-network" # Use the traefik network
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock" # Docker socket
+      - "--providers.docker.swarmMode=false" # Disable swarm mode
     ports:
       - "80:80"
       - "443:443"
