@@ -50,7 +50,6 @@ services:
       - "traefik.http.routers.nginx.rule=Host(`nginx.bhome.network`)"
       - "traefik.http.routers.nginx.entrypoints=websecure"
       - "traefik.http.routers.nginx.tls=true"
-      - "traefik.http.services.nginx.loadbalancer.server.port=80"
     networks:
       - traefik-network
 
