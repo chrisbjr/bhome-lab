@@ -9,7 +9,7 @@ services:
       - "--providers.docker=true"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-      - "--providers.file.directory=/etc/traefik/dynamic_conf/certificates.yml"
+      - "--providers.file.filename=/etc/traefik/dynamic_conf/certificates.yml"
       - "--providers.file.watch=true"
       - "--providers.docker"
       - "--providers.docker.exposedbydefault=false" # Disable exposing all containers by default
