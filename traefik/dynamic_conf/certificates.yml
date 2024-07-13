@@ -2,3 +2,23 @@ tls:
   certificates:
     - certFile: /certs/bhome.network.pem
       keyFile: /certs/bhome.network.key
+
+# -- (Optional) Overwrite Default Certificates
+stores:
+  default:
+    defaultCertificate:
+      certFile: /certs/bhome.network.pem
+      keyFile: /certs/bhome.network.key
+      stores:
+        - default
+
+certificatesResolvers:
+  default:
+    acme:
+      email: accounts@coreproc.com
+      storage: /certs/acme.json
+      dnsChallenge:
+        provider: cloudflare
+        resolvers:
+          - "1.1.1.1:53"
+          - "1.0.0.1:53"
