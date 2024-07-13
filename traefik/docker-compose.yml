@@ -16,9 +16,9 @@ services:
       - "443:443"
       - "8080:8080"
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./certs:/certs"
-      - "./dynamic_conf:/etc/traefik/dynamic_conf"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./certs:/certs:ro"
+      - "./dynamic_conf:/etc/traefik/dynamic_conf:ro"
     networks:
       - traefik-network
 
@@ -45,6 +45,7 @@ services:
       - "traefik.http.routers.nginx.rule=Host(`nginx.bhome.network`)"
       - "traefik.http.routers.nginx.entrypoints=websecure"
       - "traefik.http.routers.nginx.tls=true"
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
     networks:
       - traefik-network
 

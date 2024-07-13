@@ -15,7 +15,7 @@ stores:
 certificatesResolvers:
   default:
     acme:
-      email: accounts@coreproc.com
+      email: accounts@coreproc.ph
       storage: /certs/acme.json
       dnsChallenge:
         provider: cloudflare
