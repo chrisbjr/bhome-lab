@@ -6,6 +6,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Manila
+      - NZBGET_USER=${NZBGET_USER}
+      - NZBGET_PASS=${NZBGET_PASS}
     volumes:
       - ./nzbget:/config
       - /home/chris/vault/Plex:/downloads
@@ -38,7 +40,7 @@ services:
     volumes:
       - ./radarr:/config
       - /home/chris/vault/Plex/Movies:/downloads
-      - ./movies:/movies
+      - /home/chris/vault/Plex/Movies:/movies
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -64,6 +66,8 @@ services:
       - PGID=1000
       - TZ=Asia/Manila
       - WEBUI_PORT=8085
+      - WEBUI_USERNAME=${QBT_WEBUI_USERNAME}
+      - WEBUI_PASSWORD=${QBT_WEBUI_PASSWORD}
     volumes:
       - ./qbittorrent:/config
       - /home/chris/vault/Plex:/downloads
