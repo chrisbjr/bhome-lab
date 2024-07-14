@@ -15,3 +15,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.portainer.rule=Host(`portainer.bhome.network`)"
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+    networks:
+      - traefik-network
+networks:
+  traefik-network:
+    external: true
