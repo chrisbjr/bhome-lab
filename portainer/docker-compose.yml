@@ -14,3 +14,4 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nginx.rule=Host(`portainer.bhome.network`)"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
