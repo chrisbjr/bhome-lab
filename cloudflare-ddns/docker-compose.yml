@@ -1,9 +1,10 @@
 services:
   cloudflare-ddns:
     image: favonia/cloudflare-ddns:latest
+    container_name: cloudflare-ddns
     network_mode: host
     # This makes IPv6 easier; see below
-    restart: always
+    restart: unless-stopped
     # Restart the updater after reboot
     cap_add:
       - SETUID
@@ -29,3 +30,4 @@ services:
       # Your domains (separated by commas)
       - PROXIED=true
       # Tell Cloudflare to cache webpages and hide your IP
+      - IP6_PROVIDER=none
