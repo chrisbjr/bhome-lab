@@ -63,12 +63,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Manila
-      - WEBUI_PORT=8081
+      - WEBUI_PORT=8085
     volumes:
       - ./qbittorrent:/config
       - /home/chris/vault/Plex:/downloads
     ports:
-      - 8081:8081
+      - 8085:8085
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
