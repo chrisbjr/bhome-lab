@@ -11,3 +11,6 @@ services:
       - ./portainer-data:/data
     ports:
       - "9000:9000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=Host(`portainer.bhome.network`)"
