@@ -1,6 +1,6 @@
 services:
   portainer:
-    image: portainer/portainer-ce:alpine
+    image: portainer/portainer-ce:linux-ppc64le-2.20.3-alpine
     container_name: portainer
     restart: unless-stopped
     security_opt:
