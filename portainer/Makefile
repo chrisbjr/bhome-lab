@@ -2,7 +2,7 @@ up:
 	@docker compose up -d
 
 up-recreate:
-	@docker-compose up --force-recreate -d
+	@docker compose up --force-recreate -d
 
 down:
 	@docker-compose down
