@@ -59,7 +59,7 @@ services:
     restart: unless-stopped
 
   qbittorrent:
-    image: linuxserver/qbittorrent:latest
+    image: linuxserver/qbittorrent:4.6.0
     container_name: qbittorrent
     environment:
       - PUID=1000
