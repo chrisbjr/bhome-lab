@@ -1,7 +1,0 @@
-services:
-  cloudflare-tunnel:
-    image: cloudflare/cloudflared:latest
-    command: tunnel --no-autoupdate run --token ${CF_TUNNEL_TOKEN}
-    deploy:
-      replicas: ${CF_REPLICAS-1}
-    restart: unless-stopped
