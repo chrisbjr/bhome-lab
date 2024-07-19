@@ -2,5 +2,7 @@ services:
   cloudflare-tunnel:
     image: cloudflare/cloudflared:latest
     container_name: cloudflare-tunnel
-    command: tunnel run --token ${CF_TUNNEL_TOKEN}
+    command: tunnel --no-autoupdate run --token ${CF_TUNNEL_TOKEN}
+    deploy:
+      replicas: ${CF_REPLICAS-1}
     restart: unless-stopped
