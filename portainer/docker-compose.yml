@@ -17,7 +17,8 @@ services:
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"
     networks:
       - traefik-network
-  cloudflare-tunnel:
+  portainer-cf-tunnel:
+    container_name: portainer-cf-tunnel
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run --token ${CF_TUNNEL_TOKEN}
     restart: unless-stopped
