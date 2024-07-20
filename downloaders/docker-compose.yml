@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   qbittorrent-cf-tunnel:
-    container_name: proxmox-cf-tunnel
+    container_name: qbittorrent-cf-tunnel
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run --token ${QBT_CF_TUNNEL_TOKEN}
     restart: unless-stopped
@@ -42,7 +42,7 @@ services:
     restart: unless-stopped
 
   nzbget-cf-tunnel:
-    container_name: proxmox-cf-tunnel
+    container_name: nzbget-cf-tunnel
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run --token ${NZBGET_CF_TUNNEL_TOKEN}
     restart: unless-stopped
