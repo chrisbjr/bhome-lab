@@ -1,0 +1,7 @@
+services:
+  proxmox-cf-tunnel:
+    container_name: proxmox-cf-tunnel
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${HOMARR_CF_TUNNEL_TOKEN}
+    restart: unless-stopped
+    network_mode: host
