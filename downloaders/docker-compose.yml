@@ -1,0 +1,51 @@
+services:
+  qbittorrent:
+    image: linuxserver/qbittorrent:4.6.0
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Manila
+      - WEBUI_PORT=8085
+    volumes:
+      - ./qbittorrent:/config
+      - ${QBT_DOWNLOAD_DIR}:/downloads
+    ports:
+      - 8085:8085
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
+  qbittorrent-cf-tunnel:
+    container_name: proxmox-cf-tunnel
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${QBT_CF_TUNNEL_TOKEN}
+    restart: unless-stopped
+    network_mode: host
+    profiles:
+      - cloudflare
+
+  nzbget:
+    image: linuxserver/nzbget:latest
+    container_name: nzbget
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Manila
+      - NZBGET_USER=${NZBGET_USER}
+      - NZBGET_PASS=${NZBGET_PASS}
+    volumes:
+      - ./nzbget:/config
+      - ${NZBGET_DOWNLOAD_DIR}:/downloads
+    ports:
+      - 6789:6789
+    restart: unless-stopped
+
+  nzbget-cf-tunnel:
+    container_name: proxmox-cf-tunnel
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${NZBGET_CF_TUNNEL_TOKEN}
+    restart: unless-stopped
+    network_mode: host
+    profiles:
+      - cloudflare

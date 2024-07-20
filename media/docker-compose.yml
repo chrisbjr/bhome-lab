@@ -1,20 +1,4 @@
 services:
-  nzbget:
-    image: linuxserver/nzbget:latest
-    container_name: nzbget
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Manila
-      - NZBGET_USER=${NZBGET_USER}
-      - NZBGET_PASS=${NZBGET_PASS}
-    volumes:
-      - ./nzbget:/config
-      - /home/chris/vault/Plex:/downloads
-    ports:
-      - 6789:6789
-    restart: unless-stopped
-
   sonarr:
     image: linuxserver/sonarr:latest
     container_name: sonarr
@@ -29,7 +13,6 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
-
   radarr:
     image: linuxserver/radarr:latest
     container_name: radarr
@@ -44,7 +27,6 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
-
   overseerr:
     image: linuxserver/overseerr:latest
     container_name: overseerr
@@ -56,21 +38,4 @@ services:
       - ./overseerr:/config
     ports:
       - 5055:5055
-    restart: unless-stopped
-
-  qbittorrent:
-    image: linuxserver/qbittorrent:4.6.0
-    container_name: qbittorrent
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Manila
-      - WEBUI_PORT=8085
-    volumes:
-      - ./qbittorrent:/config
-      - /home/chris/vault/Plex:/downloads
-    ports:
-      - 8085:8085
-      - 6881:6881
-      - 6881:6881/udp
     restart: unless-stopped
