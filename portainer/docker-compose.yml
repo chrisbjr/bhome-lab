@@ -11,18 +11,14 @@ services:
       - ./portainer-data:/data
     ports:
       - "9000:9000"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.bhome.network`)"
-      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
-    networks:
-      - traefik-network
-  proxmox-cf-tunnel:
-    container_name: proxmox-cf-tunnel
+  portainer-cf-tunnel:
+    container_name: portainer-cf-tunnel
     image: cloudflare/cloudflared:latest
-    command: tunnel --no-autoupdate run --token ${PROXMOX_CF_TUNNEL_TOKEN}
+    command: tunnel --no-autoupdate run --token ${PORTAINER_CF_TUNNEL_TOKEN}
     restart: unless-stopped
-    network_mode: "host"
+    network_mode: host
+    profiles:
+      - cloudflare
 networks:
   traefik-network:
     external: true
