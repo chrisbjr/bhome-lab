@@ -1,4 +1,16 @@
 services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${PROWLARR_CONFIG_DIR-./prowlarr/config}:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
   sonarr:
     image: linuxserver/sonarr:latest
     container_name: sonarr
@@ -7,9 +19,9 @@ services:
       - PGID=1000
       - TZ=Asia/Manila
     volumes:
-      - ./sonarr:/config
-      - ${MEDIA_DOWNLOADS_DIR}:/downloads
-      - ${MEDIA_TV_SERIES_DIR}:/tv
+      - ${SONARR_CONFIG_DIR-./sonarr/config}:/config
+      - ${SONARR_DOWNLOADS_DIR-./../shared/downloads}:/downloads
+      - ${SONARR_TV_SERIES_DIR-./../shared/Series}:/tv
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -21,9 +33,9 @@ services:
       - PGID=1000
       - TZ=Asia/Manila
     volumes:
-      - ./radarr:/config
-      - ${MEDIA_DOWNLOADS_DIR}:/downloads
-      - ${MEDIA_MOVIES_DIR}:/movies
+      - ${RADARR_CONFIG_DIR-./radarr/config}:/config
+      - ${RADARR_DOWNLOADS_DIR-./../shared/downloads}:/downloads
+      - ${RADARR_MOVIES_DIR-./../shared/Movies}:/movies
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -35,7 +47,7 @@ services:
       - PGID=1000
       - TZ=Asia/Manila
     volumes:
-      - ./overseerr:/config
+      - ${OVERSEERR_CONFIG_DIR-./overseer/config}:/config
     ports:
       - 5055:5055
     restart: unless-stopped
