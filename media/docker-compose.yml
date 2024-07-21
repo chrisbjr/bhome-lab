@@ -8,8 +8,8 @@ services:
       - TZ=Asia/Manila
     volumes:
       - ./sonarr:/config
-      - /home/chris/vault/Plex/Series:/downloads
-      - /home/chris/vault/Plex/tv:/tv
+      - ${MEDIA_DOWNLOADS_DIR}:/downloads
+      - ${MEDIA_TV_SERIES_DIR}:/tv
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -22,8 +22,8 @@ services:
       - TZ=Asia/Manila
     volumes:
       - ./radarr:/config
-      - /home/chris/vault/Plex/Movies:/downloads
-      - /home/chris/vault/Plex/Movies:/movies
+      - ${MEDIA_DOWNLOADS_DIR}:/downloads
+      - ${MEDIA_MOVIES_DIR}:/movies
     ports:
       - 7878:7878
     restart: unless-stopped
