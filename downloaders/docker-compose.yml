@@ -10,10 +10,6 @@ services:
     volumes:
       - ${QBT_CONFIG_DIR-./qbittorrent}:/config
       - ${QBT_DOWNLOAD_DIR-./../shared/downloads}:/downloads
-    ports:
-      - 8085:8085
-      - 6881:6881
-      - 6881:6881/udp
     restart: unless-stopped
     network_mode: "service:gluetun"
     depends_on:
@@ -40,8 +36,6 @@ services:
     volumes:
       - ${NZBGET_CONFIG_DIR-./nzbget}:/config
       - ${NZBGET_DOWNLOAD_DIR-./../shared/downloads}:/downloads
-    ports:
-      - 6789:6789
     restart: unless-stopped
     network_mode: "service:gluetun"
     depends_on:
