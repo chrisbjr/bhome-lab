@@ -15,6 +15,9 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
 
   qbittorrent-cf-tunnel:
     container_name: qbittorrent-cf-tunnel
@@ -40,6 +43,9 @@ services:
     ports:
       - 6789:6789
     restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
 
   nzbget-cf-tunnel:
     container_name: nzbget-cf-tunnel
@@ -49,3 +55,36 @@ services:
     network_mode: host
     profiles:
       - cloudflare
+
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    # line above must be uncommented to allow external containers to connect.
+    # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/connect-a-container-to-gluetun.md#external-container-to-gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      - 8085:8085 # qBittorrent
+      - 6881:6881 # qBittorrent
+      - 6881:6881/udp # qBittorrent
+      - 6789:6789 # NZBGet
+    volumes:
+      - ./gluetun:/gluetun
+    environment:
+      # See https://github.com/qdm12/gluetun-wiki/tree/main/setup#setup
+      - VPN_SERVICE_PROVIDER=privatevpn
+      - VPN_TYPE=wireguard
+      # OpenVPN:
+      # - OPENVPN_USER=${GLUETUN_OPENVPN_USER}
+      # - OPENVPN_PASSWORD=${GLUETUN_OPENVPN_PASSWORD}
+      # - SERVER_COUNTRIES=
+      # Wireguard:
+      - WIREGUARD_PRIVATE_KEY=${GLUETUN_WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_ADDRESSES=${GLUETUN_WIREGUARD_ADDRESSES}
+      # Timezone for accurate log times
+      - TZ=Asia/Manila
+      # Server list updater
+      # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
+      - UPDATER_PERIOD=24h
