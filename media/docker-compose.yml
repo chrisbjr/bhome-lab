@@ -13,7 +13,7 @@ services:
       - ${PROWLARR_CONFIG_DIR-./prowlarr/config}:/config
     restart: unless-stopped
     networks:
-      - media_net
+      - media_network
       - host
     depends_on:
       - gluetun-media
@@ -30,7 +30,7 @@ services:
       - ${SONARR_TV_SERIES_DIR-./../shared/Series}:/tv
     restart: unless-stopped
     networks:
-      - media_net
+      - media_network
       - host
     depends_on:
       - gluetun-media
@@ -47,7 +47,7 @@ services:
       - ${RADARR_MOVIES_DIR-./../shared/Movies}:/movies
     restart: unless-stopped
     networks:
-      - media_net
+      - media_network
       - host
     depends_on:
       - gluetun-media
@@ -62,7 +62,7 @@ services:
       - ${OVERSEERR_CONFIG_DIR-./overseer/config}:/config
     restart: unless-stopped
     networks:
-      - media_net
+      - media_network
       - host
     depends_on:
       - gluetun-media
@@ -99,5 +99,5 @@ services:
       # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
       - UPDATER_PERIOD=24h
     networks:
-      - media_net
+      - media_network
     restart: unless-stopped
