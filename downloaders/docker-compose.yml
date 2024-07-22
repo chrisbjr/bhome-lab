@@ -69,14 +69,14 @@ services:
     environment:
       # See https://github.com/qdm12/gluetun-wiki/tree/main/setup#setup
       - VPN_SERVICE_PROVIDER=privatevpn
-      - VPN_TYPE=wireguard
+      - VPN_TYPE=openvpn
       # OpenVPN:
-      # - OPENVPN_USER=${GLUETUN_OPENVPN_USER}
-      # - OPENVPN_PASSWORD=${GLUETUN_OPENVPN_PASSWORD}
-      # - SERVER_COUNTRIES=
+      - OPENVPN_USER=${GLUETUN_OPENVPN_USER}
+      - OPENVPN_PASSWORD=${GLUETUN_OPENVPN_PASSWORD}
+      - SERVER_COUNTRIES=Singapore
       # Wireguard:
-      - WIREGUARD_PRIVATE_KEY=${GLUETUN_WIREGUARD_PRIVATE_KEY}
-      - WIREGUARD_ADDRESSES=${GLUETUN_WIREGUARD_ADDRESSES}
+      #- WIREGUARD_PRIVATE_KEY=${GLUETUN_WIREGUARD_PRIVATE_KEY}
+      #- WIREGUARD_ADDRESSES=${GLUETUN_WIREGUARD_ADDRESSES}
       # Timezone for accurate log times
       - TZ=Asia/Manila
       # Server list updater
