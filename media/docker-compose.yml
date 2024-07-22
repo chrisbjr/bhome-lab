@@ -9,7 +9,7 @@ services:
     volumes:
       - ${PROWLARR_CONFIG_DIR-./prowlarr/config}:/config
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    network_mode: "service:gluetun-media"
     depends_on:
       - gluetun-media
   sonarr:
@@ -24,7 +24,7 @@ services:
       - ${SONARR_DOWNLOADS_DIR-./../shared/downloads}:/downloads
       - ${SONARR_TV_SERIES_DIR-./../shared/Series}:/tv
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    network_mode: "service:gluetun-media"
     depends_on:
       - gluetun-media
   radarr:
@@ -39,7 +39,7 @@ services:
       - ${RADARR_DOWNLOADS_DIR-./../shared/downloads}:/downloads
       - ${RADARR_MOVIES_DIR-./../shared/Movies}:/movies
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    network_mode: "service:gluetun-media"
     depends_on:
       - gluetun-media
   overseerr:
@@ -52,6 +52,9 @@ services:
     volumes:
       - ${OVERSEERR_CONFIG_DIR-./overseer/config}:/config
     restart: unless-stopped
+    network_mode: "service:gluetun-media"
+    depends_on:
+      - gluetun-media
   gluetun-media:
     image: qmcgaw/gluetun
     container_name: gluetun-media
