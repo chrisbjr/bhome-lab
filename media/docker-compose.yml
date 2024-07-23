@@ -11,9 +11,9 @@ services:
       - ${QBT_CONFIG_DIR-./qbittorrent}:/config
       - ${QBT_DOWNLOAD_DIR-./../shared/downloads}:/downloads
     restart: unless-stopped
-    network_mode: "service:gluetun"
+    network_mode: "service:gluetun-media"
     depends_on:
-      - gluetun
+      - gluetun-media
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
