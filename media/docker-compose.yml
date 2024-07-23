@@ -1,4 +1,19 @@
 services:
+  qbittorrent:
+    image: linuxserver/qbittorrent:4.6.0
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Manila
+      - WEBUI_PORT=8085
+    volumes:
+      - ${QBT_CONFIG_DIR-./qbittorrent}:/config
+      - ${QBT_DOWNLOAD_DIR-./../shared/downloads}:/downloads
+    restart: unless-stopped
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
@@ -65,6 +80,9 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     ports:
+      - 8085:8085 # qBittorrent
+      - 6881:6881 # qBittorrent
+      - 6881:6881/udp # qBittorrent
       - 9696:9696 # Prowlarr
       - 8989:8989 # Sonarr
       - 7878:7878 # Radarr
