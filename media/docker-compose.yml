@@ -1,6 +1,6 @@
 services:
   qbittorrent:
-    image: linuxserver/qbittorrent:4.6.0
+    image: linuxserver/qbittorrent:4.6.5
     container_name: qbittorrent
     environment:
       - PUID=1000
