@@ -87,7 +87,6 @@ services:
       - 8989:8989 # Sonarr
       - 7878:7878 # Radarr
       - 5055:5055 # Overseerr
-    network_mode: host
     volumes:
       - ./gluetun:/gluetun
     environment:
