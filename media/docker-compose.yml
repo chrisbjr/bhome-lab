@@ -91,17 +91,15 @@ services:
       - ./gluetun:/gluetun
     environment:
       # See https://github.com/qdm12/gluetun-wiki/tree/main/setup#setup
-      - VPN_SERVICE_PROVIDER=privatevpn
-      - VPN_TYPE=openvpn
-      # OpenVPN:
-      - OPENVPN_USER=${GLUETUN_OPENVPN_USER}
-      - OPENVPN_PASSWORD=${GLUETUN_OPENVPN_PASSWORD}
-      - SERVER_COUNTRIES=${GLUETUN_SERVER_COUNTRIES}
-      # Wireguard:
-      #- WIREGUARD_PRIVATE_KEY=${GLUETUN_WIREGUARD_PRIVATE_KEY}
-      #- WIREGUARD_ADDRESSES=${GLUETUN_WIREGUARD_ADDRESSES}
+      - VPN_SERVICE_PROVIDER=custom
+      - VPN_TYPE=wireguard
+      - VPN_ENDPOINT_IP=${GLUETUN_VPN_ENDPOINT_IP}
+      - VPN_ENDPOINT_PORT=${GLUETUN_VPN_ENDPOINT_PORT}
+      - VPN_PORT_FORWARDING_PROVIDER=protonvpn
+      - WIREGUARD_PUBLIC_KEY=${GLUETUN_WIREGUARD_PUBLIC_KEY}
+      - WIREGUARD_PRIVATE_KEY=${GLUETUN_WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_ADDRESSES=${GLUETUN_WIREGUARD_ADDRESSES}
+      - FIREWALL_OUTBOUND_SUBNETS=${GLUETUN_FIREWALL_OUTBOUND_SUBNETS}
+      - VPN_PORT_FORWARDING=on
       # Timezone for accurate log times
       - TZ=Asia/Manila
-      # Server list updater
-      # See https://github.com/qdm12/gluetun-wiki/blob/main/setup/servers.md#update-the-vpn-servers-list
-      - UPDATER_PERIOD=24h
