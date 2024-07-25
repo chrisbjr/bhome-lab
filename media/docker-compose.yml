@@ -81,8 +81,8 @@ services:
       - /dev/net/tun:/dev/net/tun
     ports:
       - 8085:8085 # qBittorrent
-      - ${QBT_PORT-6881}:6881 # qBittorrent
-      - ${QBT_PORT-6881}:6881/udp # qBittorrent
+      - ${QBT_PORT-6881}:${QBT_PORT-6881} # qBittorrent
+      - ${QBT_PORT-6881}:${QBT_PORT-6881}/udp # qBittorrent
       - 9696:9696 # Prowlarr
       - 8989:8989 # Sonarr
       - 7878:7878 # Radarr
