@@ -1,9 +1,18 @@
 services:
   myspeed:
+    container_name: myspeed
     image: germannewsmaker/myspeed
     ports:
       - "5216:5216"
     volumes:
       - ./myspeed:/myspeed/data
     restart: unless-stopped
-    container_name: myspeed
+
+  myspeed-cf-tunnel:
+    container_name: myspeed-cf-tunnel
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${MYSPEED_CF_TUNNEL_TOKEN}
+    restart: unless-stopped
+    network_mode: host
+    profiles:
+      - cloudflare
