@@ -10,3 +10,4 @@ services:
       - WATCHTOWER_SCHEDULE=0 0 1 * * *  # Run daily at 1:00 AM
       - WATCHTOWER_NOTIFICATIONS=shoutrrr
       - "WATCHTOWER_NOTIFICATION_URL=smtp://${MAIL_USERNAME}:${MAIL_PASSWORD}@${MAIL_HOST}:${MAIL_PORT}/?from=${MAIL_FROM}&to=${MAIL_TO}"
+      - TZ=Asia/Manila
