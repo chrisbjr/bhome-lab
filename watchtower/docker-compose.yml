@@ -1,0 +1,12 @@
+services:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_SCHEDULE=0 0 1 * * *  # Run daily at 1:00 AM
+      - WATCHTOWER_NOTIFICATIONS=shoutrrr
+      - "WATCHTOWER_NOTIFICATION_URL=smtp://${MAIL_USERNAME}:${MAIL_PASSWORD}@${MAIL_HOST}:${MAIL_PORT}/?from=${MAIL_FROM}&to=${MAIL_TO}"
