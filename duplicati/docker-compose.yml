@@ -8,8 +8,8 @@ services:
       - TZ=Asia/Manila
       - CLI_ARGS= #optional
     volumes:
-      - ./duplicati/config:/config
-      - ./duplicati/backups:/backups
+      - ./duplicati-data/config:/config
+      - ./duplicati-data/backups:/backups
       - ${DUPLICATI_SOURCE_DIR:-./}:/source
     ports:
       - 8200:8200
