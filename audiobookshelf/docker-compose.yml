@@ -14,3 +14,11 @@ services:
       - PGID=1000
       - TZ=Your/Timezone
     restart: unless-stopped
+  audiobookshelf-cf-tunnel:
+    container_name: audiobookshelf-cf-tunnel
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${ABS_CF_TUNNEL_TOKEN}
+    restart: unless-stopped
+    network_mode: host
+    profiles:
+      - cloudflare
