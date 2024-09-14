@@ -24,10 +24,8 @@ services:
       - NZBGET_USER=${NZBGET_USER:-nzbget} # optional
       - NZBGET_PASS=${NZBGET_PASS:-tegbzn6789} # optional
     volumes:
-      - /path/to/nzbget/data:/config
-      - /path/to/downloads:/downloads # optional
-    ports:
-      - 6789:6789
+      - ./nzbget/config:/config
+      - ${NZBGET_DOWNLOAD_DIR-./../shared/downloads}:/downloads
     restart: unless-stopped
     network_mode: "service:gluetun-media"
     depends_on:
