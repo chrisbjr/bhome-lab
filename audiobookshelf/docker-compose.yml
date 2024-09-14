@@ -12,7 +12,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Your/Timezone
+      - TZ=Asia/Manila
     restart: unless-stopped
   audiobookshelf-cf-tunnel:
     container_name: audiobookshelf-cf-tunnel
