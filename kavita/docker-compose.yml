@@ -1,0 +1,23 @@
+services:
+  kavita:
+    image: lscr.io/linuxserver/kavita:latest
+    container_name: kavita
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ${KAVITA_CONFIG_DIRECTORY:-./data/config}:/config
+      - ${KAVITA_DATA_DIRECTORY:-./data/data}:/data
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+  kavita-cf-tunnel:
+    container_name: kavita-cf-tunnel
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${KAVITA_CF_TUNNEL_TOKEN}
+    restart: unless-stopped
+    network_mode: host
+    profiles:
+      - cloudflare
